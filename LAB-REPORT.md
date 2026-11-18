@@ -1,0 +1,21 @@
+# Lab Report - Lab Assignment 4
+
+**Name:** Pakeeza Hassan  
+**Reg. No.:** FA23-BSE-151  
+**Course:** CSC418 DevOps for Cloud Computing  
+**Repository:** https://github.com/PakeezaHassan5/student-task-manager
+
+## 1. Git vs GitHub; add, commit, push
+Git is a version control tool that runs on my own computer and keeps track of the history of my files. GitHub is an online platform that hosts Git repositories and adds collaboration features such as Issues, Pull Requests and Actions. The command git add moves my changes to the staging area, git commit saves a snapshot of the staged changes in the local history, and git push uploads those local commits to the repository on GitHub.
+
+## 2. Branches, Pull Requests and merge conflicts
+A branch lets me work on a feature separately without touching the stable main branch. In this lab I created one branch for each feature (add, complete and delete task). A Pull Request lets me propose the changes, get them reviewed and run automatic checks before they are merged into main. A merge conflict happens when two branches change the same lines of a file and Git cannot decide which version to keep. I faced this in the README status line and in main.py, and I had to choose the correct final version manually.
+
+## 3. fetch vs pull; merge vs rebase
+git fetch downloads the latest changes from the remote repository but does not change my working files, so I can review them first. git pull does a fetch and then merges the changes into my current branch. git merge joins two branches with a merge commit and keeps the history exactly as it happened. git rebase replays my commits on top of another branch to create a straight, linear history, but it rewrites commits, so it should not be used on branches that other people share.
+
+## 4. GitHub Issues and GitHub Actions
+GitHub Issues are used to track tasks, bugs and ideas, and they can have labels and assignees so everyone knows what needs to be done. In this lab I created Issues for the features and linked them to Pull Requests with Closes #number, so they closed automatically after merging. GitHub Actions runs workflows automatically on every push or Pull Request. My workflow runs the unit tests, so errors are caught early and reviewers can trust that the code works before merging.
+
+## 5. One difficulty I faced and how I solved it
+The main difficulty was a merge conflict in main.py on the Pull Request for the complete-task feature. After the add-task Pull Request was merged, main contained a changed version of the same file, so GitHub showed "This branch has conflicts that must be resolved". I opened the conflict editor, compared the current and incoming changes, and kept the new version of complete_task_ui that accepts several task IDs, while keeping the validation from main. After removing the conflict markers, I marked the file as resolved, committed the merge and then merged the Pull Request successfully. This showed me why small, focused branches and regular updates from main make conflicts easier to handle.
