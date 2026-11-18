@@ -14,6 +14,7 @@ def add_task_ui(manager):
             print(f"Error: {error} Please try again.")
 
 
+
 def display_tasks_ui(manager):
     tasks = manager.list_tasks()
     if not tasks:
@@ -24,11 +25,23 @@ def display_tasks_ui(manager):
 
 
 def complete_task_ui(manager):
-    task_id = int(input("Enter task ID to complete: "))
-    if manager.complete_task(task_id):
-        print("Task marked as completed.")
-    else:
-        print("Task not found.")
+    pending = [task for task in manager.list_tasks() if not task.completed]
+    if not pending:
+        print("No pending tasks to complete.")
+        return
+    print("Pending tasks:")
+    for task in pending:
+        print(task)
+    raw = input("Enter task ID(s) to complete (comma separated): ")
+    for part in raw.split(","):
+        try:
+            task_id = int(part.strip())
+            if manager.complete_task(task_id):
+                print(f"Task {task_id} marked as completed.")
+            else:
+                print(f"Task {task_id} not found or already completed.")
+        except ValueError:
+            print(f"'{part.strip()}' is not a valid task ID.")
 
 
 def print_summary_ui(manager):

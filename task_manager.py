@@ -36,8 +36,12 @@ class TaskManager:
 
     def complete_task(self, task_id):
         """Mark the task with the given ID as completed."""
+        if not isinstance(task_id, int) or task_id <= 0:
+            raise ValueError("Task ID must be a positive whole number.")
         for task in self.tasks:
             if task.task_id == task_id:
+                if task.completed:
+                    return False  # already completed
                 task.completed = True
                 return True
         return False
