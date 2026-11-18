@@ -48,6 +48,8 @@ class TaskManager:
 
     def delete_task(self, task_id):
         """Delete the task with the given ID."""
+        if not isinstance(task_id, int) or task_id <= 0:
+            raise ValueError("Task ID must be a positive whole number.")
         for task in self.tasks:
             if task.task_id == task_id:
                 self.tasks.remove(task)
