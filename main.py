@@ -4,9 +4,16 @@ from task_manager import TaskManager
 
 
 def add_task_ui(manager):
-    title = input("Enter task title: ")
-    task = manager.add_task(title)
-    print(f"Task added: {task}")
+    while True:
+        title = input("Enter task title: ")
+        try:
+            task = manager.add_task(title)
+            print(f"Task added: {task}")
+            break
+        except ValueError as error:
+            print(f"Error: {error} Please try again.")
+
+
 
 
 def display_tasks_ui(manager):
