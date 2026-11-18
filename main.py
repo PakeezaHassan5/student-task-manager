@@ -15,6 +15,7 @@ def add_task_ui(manager):
 
 
 
+
 def display_tasks_ui(manager):
     tasks = manager.list_tasks()
     if not tasks:
@@ -25,23 +26,11 @@ def display_tasks_ui(manager):
 
 
 def complete_task_ui(manager):
-    pending = [task for task in manager.list_tasks() if not task.completed]
-    if not pending:
-        print("No pending tasks to complete.")
-        return
-    print("Pending tasks:")
-    for task in pending:
-        print(task)
-    raw = input("Enter task ID(s) to complete (comma separated): ")
-    for part in raw.split(","):
-        try:
-            task_id = int(part.strip())
-            if manager.complete_task(task_id):
-                print(f"Task {task_id} marked as completed.")
-            else:
-                print(f"Task {task_id} not found or already completed.")
-        except ValueError:
-            print(f"'{part.strip()}' is not a valid task ID.")
+    task_id = int(input("Enter task ID to complete: "))
+    if manager.complete_task(task_id):
+        print("Task marked as completed.")
+    else:
+        print("Task not found.")
 
 
 def print_summary_ui(manager):
@@ -50,11 +39,21 @@ def print_summary_ui(manager):
 
 
 def delete_task_ui(manager):
-    task_id = int(input("Enter task ID to delete: "))
-    if manager.delete_task(task_id):
-        print("Task deleted.")
-    else:
-        print("Task not found.")
+    tasks = manager.list_tasks()
+    if not tasks:
+        print("No tasks to delete.")
+        return
+    for task in tasks:
+        print(task)
+    raw = input("Enter task ID to delete: ")
+    try:
+        task_id = int(raw.strip())
+        if manager.delete_task(task_id):
+            print(f"Task {task_id} deleted.")
+        else:
+            print("No task found with that ID.")
+    except ValueError:
+        print("Invalid ID. Please enter a positive whole number.")
 
 
 def print_menu():
